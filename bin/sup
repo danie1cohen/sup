@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Sup
+
+Usage:
+    sup.py [options]
+
+Options:
+    -d, --date=<date>       Open up the archived file for a given date.
+    -i, --iteration=<i>     Open/create a specific iteration of today's sup.
+    -l, --last              Opens the last existing sup file.
+    -n, --new               Start a new file, even if there is one for today.
+    -p, --print             Format today's file for printing.
+    -r, --review            Load a new sup file with all content from this week.
+    -t, --tomorrow          Run for tomorrow's date.
+    -u, --update            Copy previous sup file without done tasks. [default: yesterday]
+    -y, --yesterday         Run for yesterday's date.
+    --dir                   Print the current sup.py archive folder.
+
+This script generates a daily yaml file to quickly help you organize your
+thoughts and goals with the simple question... sup?
+"""
+from docopt import docopt
+
+from sup import cli
+
+
+if __name__ == "__main__":
+    args = docopt(__doc__)
+    cli.execute_args(args)
