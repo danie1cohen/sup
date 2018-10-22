@@ -17,15 +17,15 @@ def execute_args(args):
     if not os.path.exists(config.ARCHIVE_DIR):
         os.mkdir(config.ARCHIVE_DIR)
 
-    today = datetime.now()
+    today = datetime.now().date()
     yesterday = today - timedelta(days=1)
     tomorrow = today + timedelta(days=1)
 
-    if args['--update']:
+    if args.get('--update'):
 
-        if args['--date']:
+        if args.get('--date'):
             previous_date = dateparse(args['--date'])
-        elif args['--last']:
+        elif args.get('--last'):
             previous_date = sup.find_last_date()
         else:
             previous_date = today - timedelta(days=1)
@@ -33,44 +33,45 @@ def execute_args(args):
         sup.create_update(previous_date, today)
         sup.open_file(today)
 
-    elif args['--print']:
+    elif args.get('--print'):
 
-        if args['--date']:
+        if args.get('--date'):
             print_date = dateparse(args['--date'])
         else:
             print_date = today
 
         sup.print_sup(print_date)
 
-    elif args['--date']:
+    elif args.get('--date'):
         archive_date = dateparse(args['--date'])
         sup.create_file(archive_date)
         sup.open_file(archive_date)
 
-    elif args['--last']:
+    elif args.get('--last'):
         sup.open_file(sup.find_last_date())
 
-    elif args['--yesterday']:
+    elif args.get('--yesterday'):
         sup.open_file(yesterday)
 
-    elif args['--tomorrow']:
+    elif args.get('--tomorrow'):
         sup.create_file(tomorrow)
         sup.open_file(tomorrow)
 
-    elif args['--new']:
+    elif args.get('--new'):
         new_file = sup.create_file(today, new=True)
-        os.system('%s %s' % (config.TEXTEDITOR, new_file))
+        sup.open_file(filepath=new_file)
 
-    elif args['--iteration']:
-        i_file = create_file(today, i=args['--iteration'])
-        os.system('%s %s' % (config.TEXTEDITOR, i_file))
+    elif args.get('--iteration'):
+        i_file = sup.create_file(today, i=args['--iteration'])
+        sup.open_file(filepath=i_file)
 
-    elif args['--review']:
+    elif args.get('--review'):
         review_file = sup.create_review_file(today)
-        os.system('%s %s' % (config.TEXTEDITOR, review_file))
+        sup.open_file(filepath=review_file)
 
-    elif args['--dir']:
+    elif args.get('--dir'):
         print(config.ARCHIVE_DIR)
+
     else:
         sup.create_file(today)
         sup.open_file(today)

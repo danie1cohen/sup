@@ -36,11 +36,19 @@ def print_yaml(obj):
     return lines
 
 
-def open_file(date):
+def get_fileloc(date):
+    """
+    Returns the file location.
+    """
+    return os.path.join(config.ARCHIVE_DIR, get_filename(date))
+
+
+def open_file(date, filepath=None):
     """
     Opens the sup file for a given date.
     """
-    file_loc = get_fileloc(date)
+    file_loc = get_fileloc(date) if not filepath else filepath
+
     if os.path.exists(file_loc):
         os.system('%s %s' % (config.TEXTEDITOR, file_loc))
     else:
@@ -100,13 +108,6 @@ def get_filename(date):
     Returns the filename for a given date.
     """
     return config.FILENAME % date_str(date)
-
-
-def get_fileloc(date):
-    """
-    Returns the file location.
-    """
-    return os.path.join(config.ARCHIVE_DIR, get_filename(date))
 
 
 def print_sup(today):
