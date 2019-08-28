@@ -4,7 +4,6 @@ Get configuration from your ~/.sup.yml file.
 import logging
 import os
 
-from nose.tools import *
 import yaml
 
 
