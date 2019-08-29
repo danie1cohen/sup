@@ -72,6 +72,10 @@ def execute_args(args):
     elif args.get('--dir'):
         print(config.ARCHIVE_DIR)
 
+    elif args.get('--version'):
+        import pkg_resources
+        print('Sup version: %s' % pkg_resources.get_distribution('sup'))
+
     else:
         sup.create_file(today)
         sup.open_file(today)
