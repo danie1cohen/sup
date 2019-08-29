@@ -30,15 +30,11 @@ def read_config(config_path, autocreate=False, **kwargs):
         print('Could not find your sup? config file at path: %s' % config_path)
         create_config(config_path, **kwargs) if autocreate else sys.exit(1)
 
-    print('Reading config from %s' % config_path)
-
     with open(config_path, 'rb') as stream:
-        config = yaml.load(stream)
+        config = yaml.safe_load(stream)
 
     params = config['archive_dir'], config['text_editor'], config['print_cmd']
-    print('config: %s' % config)
     return config
-
 
 def create_config(config_path, **kwargs):
     config = {
@@ -46,15 +42,11 @@ def create_config(config_path, **kwargs):
         'text_editor': 'vim',
         'print_cmd': 'cat',
     }
-    print('default config %s' % config)
-
 
     with open(config_path, 'wb') as stream:
         config.update(kwargs)
-        print('updated config %s' % config)
         stream.write(yaml.dump(config))
 
-    print('Created new sup? config with contents %s' % config)
     return config
 
 CONFIG = read_config(CONFIG_PATH)

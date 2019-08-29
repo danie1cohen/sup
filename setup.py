@@ -11,7 +11,7 @@ config = {
     'url': 'https://github.com/danie1cohen/sup.git',
     'download_url': 'https://github.com/daine1cohen/sup.git',
     'author_email': 'dcohen@usccreditunion.org',
-    'version': '0.0.1',
+    'version': '0.0.2',
     'install_requires': ['docopt', 'PyYAML'],
     'packages': ['sup'],
     'scripts': ['bin/sup', ],

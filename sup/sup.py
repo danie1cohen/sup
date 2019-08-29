@@ -117,7 +117,7 @@ def print_sup(today):
     fileloc = get_fileloc(today)
 
     with open(fileloc, 'rb') as stream:
-        today_dict = yaml.load(stream)
+        today_dict = yaml.safe_load(stream)
         lines = print_yaml(today_dict)
 
     # write the file out with more carriage returns
@@ -206,7 +206,7 @@ def create_update(previous_date, today):
     today_loc = get_fileloc(today)
 
     with open(previous_loc, 'rb') as stream:
-        prev_list = yaml.load(stream)
+        prev_list = yaml.safe_load(stream)
 
     today_list = []
     for item in prev_list:
