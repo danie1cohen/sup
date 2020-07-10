@@ -7,7 +7,6 @@ import os
 from string import printable
 import sys
 
-from docopt import docopt
 import yaml
 from dateutil.parser import parse
 
