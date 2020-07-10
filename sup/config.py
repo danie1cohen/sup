@@ -3,6 +3,7 @@ Get configuration from your ~/.sup.yml file.
 """
 import logging
 import os
+import sys
 
 import yaml
 
