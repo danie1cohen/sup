@@ -42,6 +42,16 @@ def execute_args(args):
 
         sup.print_sup(print_date)
 
+    elif args.get('--config'):
+        does_exist = os.path.exists(config.CONFIG_PATH)
+        print(
+            'Config %s at path "%s"' % (
+                'exists' if does_exist else 'does not exist',
+                config.CONFIG_PATH
+            )
+        )
+        print('contents: %s' % config.CONFIG)
+
     elif args.get('--date'):
         archive_date = dateparse(args['--date'])
         sup.create_file(archive_date)

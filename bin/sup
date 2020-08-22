@@ -5,6 +5,7 @@ Usage:
     sup.py [options]
 
 Options:
+    -c, --config            Display information about the current configuration
     -d, --date=<date>       Open up the archived file for a given date.
     -i, --iteration=<i>     Open/create a specific iteration of today's sup.
     -l, --last              Opens the last existing sup file.

@@ -34,13 +34,11 @@ def print_yaml(obj):
         lines.append(line)
     return lines
 
-
 def get_fileloc(date):
     """
     Returns the file location.
     """
     return os.path.join(config.ARCHIVE_DIR, get_filename(date))
-
 
 def open_file(date, filepath=None):
     """
@@ -53,7 +51,6 @@ def open_file(date, filepath=None):
     else:
         print("No 'Sup?' file found for %s" % date.date())
 
-
 def write_file(loc, header):
     """
     Write an empty sup file from the template.
@@ -63,7 +60,6 @@ def write_file(loc, header):
             stream.write(bytes(config.TEMPLATE % header), encoding='utf-8')
     else:
         print('Not writing %s. File already exists.')
-
 
 def create_file(date, new=False, i=None, custom_title=None):
     """
@@ -94,20 +90,17 @@ def create_file(date, new=False, i=None, custom_title=None):
 
     return loc
 
-
 def date_str(date):
     """
     Return the date in sup date format.
     """
     return date.strftime('%Y-%m-%d')
 
-
 def get_filename(date):
     """
     Returns the filename for a given date.
     """
     return config.FILENAME % date_str(date)
-
 
 def print_sup(today):
     """
@@ -127,7 +120,6 @@ def print_sup(today):
 
     os.system('%s %s' % (config.PRINT_CMD, textloc))
 
-
 def create_review_file(today):
     """
     Create a review sup file of the previous week's work.
@@ -145,7 +137,6 @@ def create_review_file(today):
                         stream.write(bytes(line), encoding='utf-8')
 
         return review_file
-
 
 def ignore_done_dict(obj):
     """
@@ -170,7 +161,6 @@ def ignore_done_dict(obj):
 
     return new_dict
 
-
 def ignore_done_list(obj):
     """Ignores done, and iterates through lists in values."""
     if not isinstance(obj, list): return obj
@@ -185,7 +175,6 @@ def ignore_done_list(obj):
 
     return new_list
 
-
 def ignore_done(obj):
     """
     Uses ignore_done_list and ignore_done_dict to walk through a complex
@@ -194,7 +183,6 @@ def ignore_done(obj):
     obj = ignore_done_dict(obj)
     obj = ignore_done_list(obj)
     return obj
-
 
 def create_update(previous_date, today):
     """
@@ -227,7 +215,6 @@ def create_update(previous_date, today):
 
     return today_loc
 
-
 def parse_date_from_filename(filename):
     """
     Return the date of a given filename pattern of FILENAME = 'sup_%s.yml'
@@ -239,7 +226,6 @@ def parse_date_from_filename(filename):
         pass
     else:
         return dt
-
 
 def find_last_date():
     """
