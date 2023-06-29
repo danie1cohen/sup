@@ -34,7 +34,11 @@ def read_config(config_path, autocreate=False, **kwargs):
     with open(config_path, 'rb') as stream:
         config = yaml.safe_load(stream)
 
-    params = config['archive_dir'], config['text_editor'], config['print_cmd']
+    for key, val in config.items():
+        
+        if val.startswith('$'):
+            config[key] = os.environ.get(val.replace('$', '', 1))
+
     return config
 
 def create_config(config_path, **kwargs):

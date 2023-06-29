@@ -40,18 +40,21 @@ def get_fileloc(date):
     """
     return os.path.join(config.ARCHIVE_DIR, get_filename(date))
 
-def open_file(date, filepath=None):
+def open_file(date, filepath=None, verbose=False):
     """
     Opens the sup file for a given date.
     """
     file_loc = get_fileloc(date) if not filepath else filepath
 
     if os.path.exists(file_loc):
-        os.system('%s %s' % (config.TEXTEDITOR, file_loc))
+        if verbose:
+            print('Using text editor "%s"' % config.TEXTEDITOR)
+
+        os.system('"%s" %s' % (config.TEXTEDITOR, file_loc))
     else:
         print("No 'Sup?' file found for %s" % date.date())
 
-def write_file(loc, header):
+def write_file(loc, header, verbose=False):
     """
     Write an empty sup file from the template.
     """
@@ -61,7 +64,7 @@ def write_file(loc, header):
     else:
         print('Not writing %s. File already exists.')
 
-def create_file(date, new=False, i=None, custom_title=None):
+def create_file(date, new=False, i=None, custom_title=None, verbose=False):
     """
     Creates a sup file for a given date.
     """
@@ -102,7 +105,7 @@ def get_filename(date):
     """
     return config.FILENAME % date_str(date)
 
-def print_sup(today):
+def print_sup(today, verbose=False):
     """
     Create a printer friendly sup file with extra whitespace for notes.
     """
@@ -184,7 +187,7 @@ def ignore_done(obj):
     obj = ignore_done_list(obj)
     return obj
 
-def create_update(previous_date, today):
+def create_update(previous_date, today, verbose=False):
     """
     Interprets yesterday's yaml, and removes any done items, the rest are
     ported to today's yaml.

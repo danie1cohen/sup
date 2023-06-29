@@ -26,12 +26,12 @@ def execute_args(args):
         if args.get('--date'):
             previous_date = dateparse(args['--date'])
         elif args.get('--last'):
-            previous_date = sup.find_last_date()
+            previous_date = sup.find_last_date(verbose=args['--verbose'])
         else:
             previous_date = today - timedelta(days=1)
 
-        sup.create_update(previous_date, today)
-        sup.open_file(today)
+        sup.create_update(previous_date, today, verbose=args['--verbose'])
+        sup.open_file(today, verbose=args['--verbose'])
 
     elif args.get('--print'):
 
@@ -40,7 +40,7 @@ def execute_args(args):
         else:
             print_date = today
 
-        sup.print_sup(print_date)
+        sup.print_sup(print_date, verbose=args['--verbose'])
 
     elif args.get('--config'):
         does_exist = os.path.exists(config.CONFIG_PATH)
@@ -54,30 +54,30 @@ def execute_args(args):
 
     elif args.get('--date'):
         archive_date = dateparse(args['--date'])
-        sup.create_file(archive_date)
-        sup.open_file(archive_date)
+        sup.create_file(archive_date, verbose=args['--verbose'])
+        sup.open_file(archive_date, verbose=args['--verbose'])
 
     elif args.get('--last'):
-        sup.open_file(sup.find_last_date())
+        sup.open_file(sup.find_last_date(), verbose=args['--verbose'])
 
     elif args.get('--yesterday'):
-        sup.open_file(yesterday)
+        sup.open_file(yesterday, verbose=args['--verbose'])
 
     elif args.get('--tomorrow'):
-        sup.create_file(tomorrow)
-        sup.open_file(tomorrow)
+        sup.create_file(tomorrow, verbose=args['--verbose'])
+        sup.open_file(tomorrow, verbose=args['--verbose'])
 
     elif args.get('--new'):
-        new_file = sup.create_file(today, new=True)
-        sup.open_file(filepath=new_file)
+        new_file = sup.create_file(today, new=True, verbose=args['--verbose'])
+        sup.open_file(filepath=new_file, verbose=args['--verbose'])
 
     elif args.get('--iteration'):
-        i_file = sup.create_file(today, i=args['--iteration'])
-        sup.open_file(filepath=i_file)
+        i_file = sup.create_file(today, i=args['--iteration'], verbose=args['--verbose'])
+        sup.open_file(filepath=i_file, verbose=args['--verbose'])
 
     elif args.get('--review'):
-        review_file = sup.create_review_file(today)
-        sup.open_file(filepath=review_file)
+        review_file = sup.create_review_file(today, verbose=args['--verbose'])
+        sup.open_file(filepath=review_file, verbose=args['--verbose'])
 
     elif args.get('--dir'):
         print(config.ARCHIVE_DIR)
@@ -87,5 +87,5 @@ def execute_args(args):
         print('Sup version: %s' % pkg_resources.get_distribution('sup'))
 
     else:
-        sup.create_file(today)
-        sup.open_file(today)
+        sup.create_file(today, verbose=args['--verbose'])
+        sup.open_file(today, verbose=args['--verbose'])

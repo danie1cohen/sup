@@ -14,7 +14,8 @@ Options:
     -r, --review            Load a new sup file with all content from this week.
     -t, --tomorrow          Run for tomorrow's date.
     -u, --update            Copy previous sup file without done tasks. [default: yesterday]
-    -v, --version           Display the version number of this tool.
+    -v, --verbose           Run in verbose mode
+    --version               Display the version number of this tool.
     -y, --yesterday         Run for yesterday's date.
     --dir                   Print the current sup.py archive folder.
 
