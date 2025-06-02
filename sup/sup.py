@@ -230,7 +230,7 @@ def parse_date_from_filename(filename):
     else:
         return dt
 
-def find_last_date():
+def find_last_date(*args, **kwargs):
     """
     Return the date of the most recent sup file in the sup dir.
     """
